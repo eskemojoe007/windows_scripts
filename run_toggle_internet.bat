@@ -1,0 +1,3 @@
+@Echo off
+python toggle_internet_options.py
+set /P dummy=All done.  Press any key to terminate program...
