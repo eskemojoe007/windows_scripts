@@ -1,8 +1,5 @@
 import subprocess
-import os, sys
-home = os.path.expanduser("~")
-sys.path.append(os.path.join(home,'Documents','GitHub'))
-from Logger import customLogger
+from colored_logger import customLogger
 logger = customLogger('root')
 logger.setLevel('INFO')
 # Set some variables
@@ -24,11 +21,15 @@ quer_command = build_command([query,path,'/v',key_name])
 logger.debug('Running Command: %s'%(quer_command))
 p = subprocess.Popen(quer_command, stdout=subprocess.PIPE)
 stdout, stderr = p.communicate()
-
 if not stderr is None:
     logger.warn('STDERR output was not None as expected: %s\nContinueing anyway...'%(stderr))
 
+# print(type(stdout))
+# stdout
 # Split the string on keytype and look for value
+
+
+stdout = stdout.decode("utf-8")
 splits = stdout.split(key_type)
 splits_key = 1
 if (len(splits) < 2):
@@ -38,7 +39,7 @@ elif (len(splits) > 2):
     logger.warn('Had multiple splits...using this value:%s. Raw output was: \n%s'%(splits[splits_key],stdout))
 
 binary = splits[splits_key].strip()
-
+binary
 # Now we look for the proper key
 start_pos = 16 #Inclusive
 end_pos = 18 # exclusive
@@ -55,11 +56,12 @@ elif binary[start_pos:end_pos] =='04':
 elif binary[start_pos:end_pos] ==box_unchecked:
     logger.info('Wasn"t using Config Script...Turning it on')
     new_binary = binary[:start_pos] + box_checked + binary[end_pos:]
-
 else:
     logger.critical('Unexpected key value for config script: %s'%(binary[start_pos:end_pos]))
     raise ValueError('See logger output')
 
+binary
+new_binary
 # Now we actually set it
 set_command = build_command([setting,path,'/v',key_name,'/t',key_type,'/d',new_binary,'/f'])
 logger.debug('Running Command: %s'%(set_command))

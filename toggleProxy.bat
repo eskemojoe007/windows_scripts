@@ -25,7 +25,8 @@ REM File list with spaces that you need commented or uncommented
 REM  If just using conda, you only need .condarc .  But I have
 REM  I have other tools that need the same treatment
 REM set files=%ROOT%\.condarc %ROOT%\.npmrc %ROOT%\.atom\.apmrc
-set files=%ROOT%\.condarc %ROOT%\.atom\.apmrc
+REM set files=%ROOT%\.condarc %ROOT%\.atom\.apmrc
+set files=%ROOT%\.atom\.apmrc
 
 REM Check to see the current status of the proxyOn variable...
 REM this is where we store whether the proxy is on or off
