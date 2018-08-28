@@ -26,7 +26,7 @@ REM  If just using conda, you only need .condarc .  But I have
 REM  I have other tools that need the same treatment
 REM set files=%ROOT%\.condarc %ROOT%\.npmrc %ROOT%\.atom\.apmrc
 REM set files=%ROOT%\.condarc %ROOT%\.atom\.apmrc
-set files=%ROOT%\.atom\.apmrc
+REM set files=%ROOT%\.atom\.apmrc
 
 REM Check to see the current status of the proxyOn variable...
 REM this is where we store whether the proxy is on or off
@@ -41,8 +41,8 @@ if /I %proxyOn%==1 (
     REG delete HKCU\Environment /F /V HTTPS_PROXY >nul 2>&1
 
     REM Turning off the proxy, we need to comment the rc files
-    echo Commenting files: %files%
-    sed -i "s/^/;/" %files%
+    REM echo Commenting files: %files%
+    REM sed -i "s/^/;/" %files%
 
     REM Toggle the prxoy key
     echo Toggling proxyOn env variable
@@ -57,8 +57,8 @@ if /I %proxyOn%==1 (
     setx HTTPS_PROXY %proxy% >nul 2>&1
 
     REM Comment the rc files to disable the proxy
-    echo UnCommenting files: %files%
-    sed -i "s/;//" %files%
+    REM echo UnCommenting files: %files%
+    REM sed -i "s/;//" %files%
 
     REM Toggle the proxy key
     echo Toggling proxyOn env variable
