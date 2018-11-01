@@ -3,6 +3,7 @@
 
 :: Commands
 DOSKEY prp=pipenv run python $*
+DOSKEY pri=pipenv run ipython $*
 DOSKEY prs=pipenv run shell
 DOSKEY alias=atom %USERPROFILE%\Documents\GitHub\windows_scripts\alias.cmd
 
